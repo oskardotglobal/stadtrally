@@ -1,5 +1,6 @@
 import {NextRequest, NextResponse} from "next/server";
 import {auth, client} from "@/lib/pocketbase";
+import {is_authorized} from "@/lib/auth";
 
 export async function POST(req: NextRequest) {
     let res
@@ -7,23 +8,17 @@ export async function POST(req: NextRequest) {
     try {
         await req.json()
             .then(async (json) => {
-                if (!json.code) {
-                    res = NextResponse.json({status: 400, authorized: false})
-                    return
-                }
-
                 if (!client.authStore.isValid) await auth()
-                const record = await client.collection("teams").getFirstListItem(`code=${json.code}`)
-
-                if (!record?.id) {
-                    res = NextResponse.json({status: 401, authorized: false})
+                if (!await is_authorized(json.code)) {
+                    res = NextResponse.json({}, {status: 401})
                     return
                 }
 
-                res = NextResponse.json({status: 200, authorized: true})
+                res = NextResponse.json({}, {status: 200})
             })
-    } catch {
-        res = NextResponse.json({status: 400, authorized: false})
+    } catch (e) {
+        res = NextResponse.json({}, {status: 500})
+        console.error(e)
     }
 
     return res
