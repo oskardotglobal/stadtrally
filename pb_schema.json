@@ -1,0 +1,186 @@
+[
+  {
+    "id": "f91e7lmbvo7ls1p",
+    "name": "images",
+    "type": "base",
+    "system": false,
+    "schema": [
+      {
+        "id": "fjygwsa1",
+        "name": "team_id",
+        "type": "relation",
+        "system": false,
+        "required": true,
+        "options": {
+          "collectionId": "qka73o7uf951zex",
+          "cascadeDelete": false,
+          "minSelect": null,
+          "maxSelect": 1,
+          "displayFields": []
+        }
+      },
+      {
+        "id": "nuneedo6",
+        "name": "base64",
+        "type": "text",
+        "system": false,
+        "required": true,
+        "options": {
+          "min": null,
+          "max": null,
+          "pattern": ""
+        }
+      }
+    ],
+    "indexes": [],
+    "listRule": null,
+    "viewRule": null,
+    "createRule": null,
+    "updateRule": null,
+    "deleteRule": null,
+    "options": {}
+  },
+  {
+    "id": "qka73o7uf951zex",
+    "name": "teams",
+    "type": "base",
+    "system": false,
+    "schema": [
+      {
+        "id": "lvyohcjs",
+        "name": "name",
+        "type": "text",
+        "system": false,
+        "required": false,
+        "options": {
+          "min": null,
+          "max": null,
+          "pattern": ""
+        }
+      },
+      {
+        "id": "qapz2qvg",
+        "name": "member_names",
+        "type": "text",
+        "system": false,
+        "required": false,
+        "options": {
+          "min": null,
+          "max": null,
+          "pattern": ""
+        }
+      },
+      {
+        "id": "lg7ehnfm",
+        "name": "current_question",
+        "type": "number",
+        "system": false,
+        "required": true,
+        "options": {
+          "min": 1,
+          "max": null
+        }
+      },
+      {
+        "id": "ygla22hf",
+        "name": "code",
+        "type": "number",
+        "system": false,
+        "required": true,
+        "options": {
+          "min": 0,
+          "max": 999999
+        }
+      },
+      {
+        "id": "8ysilvbh",
+        "name": "locations",
+        "type": "json",
+        "system": false,
+        "required": false,
+        "options": {}
+      }
+    ],
+    "indexes": [],
+    "listRule": null,
+    "viewRule": null,
+    "createRule": null,
+    "updateRule": null,
+    "deleteRule": null,
+    "options": {}
+  },
+  {
+    "id": "hzmyn42pzhj2kjf",
+    "name": "questions",
+    "type": "base",
+    "system": false,
+    "schema": [
+      {
+        "id": "4tgeec4h",
+        "name": "task",
+        "type": "text",
+        "system": false,
+        "required": true,
+        "options": {
+          "min": null,
+          "max": null,
+          "pattern": ""
+        }
+      },
+      {
+        "id": "x12ewrqh",
+        "name": "numId",
+        "type": "number",
+        "system": false,
+        "required": true,
+        "options": {
+          "min": null,
+          "max": null
+        }
+      },
+      {
+        "id": "gpbrbffo",
+        "name": "info",
+        "type": "text",
+        "system": false,
+        "required": false,
+        "options": {
+          "min": null,
+          "max": null,
+          "pattern": ""
+        }
+      },
+      {
+        "id": "exn1oiyv",
+        "name": "image",
+        "type": "text",
+        "system": false,
+        "required": true,
+        "options": {
+          "min": null,
+          "max": null,
+          "pattern": ""
+        }
+      },
+      {
+        "id": "hrwhgmki",
+        "name": "place",
+        "type": "text",
+        "system": false,
+        "required": true,
+        "options": {
+          "min": null,
+          "max": null,
+          "pattern": ""
+        }
+      }
+    ],
+    "indexes": [],
+    "listRule": null,
+    "viewRule": null,
+    "createRule": null,
+    "updateRule": null,
+    "deleteRule": null,
+    "options": {}
+  }
+]
