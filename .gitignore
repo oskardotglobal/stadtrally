@@ -43,3 +43,6 @@ pb_migrations
 # binary files
 scripts/group1
 scripts/group2
+
+# secrets
+.env

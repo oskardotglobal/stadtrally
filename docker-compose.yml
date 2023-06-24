@@ -1,0 +1,29 @@
+version: "3"
+
+volumes:
+  data:
+
+services:
+  
+  #app:
+  #  build:
+  #    context: .
+  #    dockerfile: Dockerfile
+  #    args:
+  #      POCKETBASE_URL: ${POCKETBASE_URL}
+  #      POCKETBASE_USER: ${POCKETBASE_USER}
+  #      POCKETBASE_PASSWD: ${POCKETBASE_PASSWD}
+  #  restart: always
+
+  pocketbase:
+    image: ghcr.io/muchobien/pocketbase:latest
+    restart: always
+    volumes:
+      - "data:/pb_data"
+    healthcheck:
+      test: wget --no-verbose --tries=1 --spider http://localhost:8090/api/health || exit 1
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  
