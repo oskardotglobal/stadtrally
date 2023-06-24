@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 const PocketBase = require("pocketbase/cjs");
-const client = new PocketBase("http://127.0.0.1:8090");
+const client = new PocketBase("URL");
 
 const colors = [
     "Black",
@@ -41,7 +41,7 @@ const people = 30;
 const teams = Math.ceil(people / teamSize);
 
 (async () => {
-    await client.admins.authWithPassword("me@oskar.global", "GsuA3ZxAU&8EniR9");
+    await client.admins.authWithPassword("USER", "PASSWORD");
 
     for (let i = 0; i <= teams; i++) {
         await client.collection("teams").create({

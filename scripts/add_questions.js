@@ -4,7 +4,7 @@ const fs = require("fs");
 const path = require("path");
 const PocketBase = require("pocketbase/cjs");
 
-const client = new PocketBase("http://127.0.0.1:8090");
+const client = new PocketBase("URL");
 
 const group1 = [
     ["Red City Hall 'Rotes Rathaus'", "Take a picture."],
@@ -42,7 +42,7 @@ async function create(group, folder) {
 }
 
 (async () => {
-    await client.admins.authWithPassword("me@oskar.global", "GsuA3ZxAU&8EniR9");
+    await client.admins.authWithPassword("USER", "PASSWORD");
 
     await create(group1, "group1")
 })();
