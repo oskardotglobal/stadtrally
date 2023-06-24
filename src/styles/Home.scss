@@ -1,0 +1,19 @@
+@import "globals";
+
+h1 {
+    padding: 0;
+}
+
+.content {
+    height: 100%;
+    width: 100%;
+
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 2fr 3fr;
+
+    img {
+        object-fit: cover;
+        width: 100%;
+    }
+}

@@ -1,19 +1,18 @@
 "use client";
 
-import {FormEvent, useEffect, useState} from "react";
-import {getSavedCode, saveCode} from "@/lib/storage";
+import {FormEvent} from "react";
+import {useLoginCode} from "@/lib/hooks";
+import LoginForm from "@/components/login/LoginForm";
+import ProfileForm from "@/components/login/ProfileForm";
+import React from "react";
+
+import "@/styles/globals.scss";
 
 export default function LoginPage() {
-    const [code, setCode] = useState<string>("")
-    const [profile, setProfile] = useState()
+    const [code, setCode] = useLoginCode()
     let unauthorized = false
 
-    useEffect(() => {
-        if (!code) return setCode(getSavedCode(localStorage))
-        if (!getSavedCode(localStorage) && code) return saveCode(code, localStorage)
-
-        refetch_profile()
-    }, [code, profile]);
+    document.getElementById("header")
 
     function login(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
@@ -36,111 +35,32 @@ export default function LoginPage() {
 
                 unauthorized = false
                 setCode(formElements.codeInput.value)
-                saveCode(code, localStorage)
+                localStorage.setItem("authCode", code)
             })
-
-        refetch_profile()
-    }
-
-    function refetch_profile() {
-        if (!profile) {
-            fetch(`/api/profile?code=${code}`)
-                .then(res => res.json())
-                .then(json => setProfile(json))
-        }
-    }
-
-    function update_profile(event: FormEvent<HTMLFormElement>) {
-        event.preventDefault()
-
-        const form = event.currentTarget
-        const formElements = form.elements as typeof form.elements & {
-            name: {value: string},
-            memberNames: {value: string}
-        }
-
-        fetch("/api/profile", {
-            method: "POST",
-            body: JSON.stringify({
-                code: code,
-                name: formElements.name.value,
-                member_names: formElements.memberNames.value
-            })
-        })
-
-        refetch_profile()
     }
 
     if (code) {
-        // TODO: go back to page you came from
-
-        refetch_profile()
-
         return <div>
-            <h1>Edit profile</h1>
-            <form onSubmit={update_profile}>
-                <span>Team Name</span> <br/>
-                <input
-                    type="text"
-                    id="name"
-                    required={false}
-                    defaultValue={// @ts-ignore
-                    profile?.name}
-                />
+            {
+                // @ts-ignore why the fuck
+                // note to self: put swear counter inside ts-ignores onto readme
+                <ProfileForm
+                    code={code}>
+                </ProfileForm>
+            }
 
-                <br/>
-
-                <span>Member Names</span> <br/>
-                <input
-                    type="text"
-                    id="memberNames"
-                    defaultValue={// @ts-ignore
-                    profile?.member_names}
-                    required={false}
-                />
-
-                <br/>
-
-                <button type="submit">Update</button>
-            </form>
+            <br />
+            <button><a href="/">Start playing</a></button>
         </div>
     }
 
     if (unauthorized) return <div>
-        <h1>Login</h1>
-        <form onSubmit={login}>
-            <span>Login Code</span> <br/>
-            <input
-                type="text"
-                id="codeInput"
-                required={true}
-                minLength={6}
-                maxLength={6}
-            />
-
-            <br/>
-
-            <button type="submit">Submit</button>
-        </form>
+        <LoginForm login={login} />
 
         <p>Incorrect code.</p>
     </div>
 
     return <div>
-        <h1>Login</h1>
-        <form onSubmit={login}>
-            <span>Login Code</span> <br/>
-            <input
-                type="text"
-                id="codeInput"
-                required={true}
-                minLength={6}
-                maxLength={6}
-            />
-
-            <br/>
-
-            <button type="submit">Submit</button>
-        </form>
+        <LoginForm login={login} />
     </div>
 }

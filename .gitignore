@@ -39,3 +39,7 @@ pocketbase.exe
 pocketbase
 pb_data
 pb_migrations
+
+# binary files
+scripts/group1
+scripts/group2

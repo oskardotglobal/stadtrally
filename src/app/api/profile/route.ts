@@ -1,6 +1,7 @@
 import {NextRequest, NextResponse} from "next/server";
 import {auth, client} from "@/lib/pocketbase";
 import {is_authorized} from "@/lib/auth";
+import {Team} from "@/lib/types";
 
 export async function POST(req: NextRequest) {
     let res
@@ -21,19 +22,19 @@ export async function POST(req: NextRequest) {
                 }
 
                 const record = await client.collection("teams")
-                    .getFirstListItem(`code=${json.code}`)
+                    .getFirstListItem<Team>(`code=${json.code}`)
 
 
                 if (json.name) {
                     await client.collection("teams")
-                        .update(record.id, {
+                        .update<Team>(record.id, {
                             "name": json.name
                         })
                 }
 
                 if (json.member_names) {
                     await client.collection("teams")
-                        .update(record.id, {
+                        .update<Team>(record.id, {
                             "member_names": json.member_names
                         })
                 }
@@ -57,7 +58,7 @@ export async function GET(req: NextRequest) {
         if (!await is_authorized(code)) return NextResponse.json({}, {status: 401})
 
         const record = await client.collection("teams")
-            .getFirstListItem(`code=${code}`)
+            .getFirstListItem<Team>(`code=${code}`)
 
         return NextResponse.json({name: record.name, member_names: record.member_names}, {status: 200})
     } catch (e) {

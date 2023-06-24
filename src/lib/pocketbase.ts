@@ -1,6 +1,15 @@
 import PocketBase from "pocketbase";
+import {printAndExit} from "next/dist/server/lib/utils";
 
-export const client = new PocketBase("http://127.0.0.1:8090");
+export const client = new PocketBase(process.env.POCKETBASE_URL);
+
 export const auth = async () => {
-    await client.admins.authWithPassword("me@oskar.global", "GsuA3ZxAU&8EniR9");
+    if (
+        !process.env.POCKERBASE_USER
+        || !process.env.POCKETBASE_PASSWD
+        || !process.env.POCKETBASE_URL
+    ) printAndExit("Check your env", -1)
+
+    // @ts-ignore
+    await client.admins.authWithPassword(process.env.POCKETBASE_USER, process.env.POCKETBASE_PASSWD);
 }

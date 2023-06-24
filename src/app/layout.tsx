@@ -1,33 +1,23 @@
-import {Inter} from 'next/font/google'
 import React from "react";
-
-const inter = Inter({subsets: ['latin']})
+import Header from "@/components/Header";
 
 export const metadata = {
     title: "Stadtrally"
 }
 
-export default function RootLayout({
-                                       children,
-                                   }: {
-    children: React.ReactNode
-}) {
+export default function RootLayout({children}: {children: React.ReactNode }) {
     return (
         <html lang="en">
-        <body className={inter.className}>
-            <header>
-                <a
-                    href="https://github.com/oskardotglobal"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Made with ❤️ by oskardotglobal
-                </a>
-            </header>
+        <body>
+            <Header />
 
             <main>
                 {children}
             </main>
+
+            <footer>
+                <p>Made with ❤️ by oskardotglobal</p>
+            </footer>
         </body>
         </html>
     )

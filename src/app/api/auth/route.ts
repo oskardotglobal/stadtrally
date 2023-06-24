@@ -14,7 +14,7 @@ export async function POST(req: NextRequest) {
                     return
                 }
 
-                res = NextResponse.json({}, {status: 200})
+                res = NextResponse.json({ authorized: true }, {status: 200})
             })
     } catch (e) {
         res = NextResponse.json({}, {status: 500})
