@@ -18,12 +18,10 @@ export default function ProfileForm({code}: {code: string}) {
             method: "POST",
             body: JSON.stringify({
                 code: code,
-                name: formElements.name.value,
-                member_names: formElements.memberNames.value
+                name: formElements.name.value ? formElements.name.value : "Empty",
+                member_names: formElements.memberNames.value ? formElements.memberNames.value : "None"
             })
-        })
-
-        refetch_profile()
+        }).then(() => refetch_profile())
     }
 
     function refetch_profile() {

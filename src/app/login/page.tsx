@@ -7,6 +7,7 @@ import ProfileForm from "@/components/login/ProfileForm";
 import React from "react";
 
 import "@/styles/globals.scss";
+import {redirect} from "next/navigation";
 
 export default function LoginPage() {
     const [code, setCode] = useLoginCode()

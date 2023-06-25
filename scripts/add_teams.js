@@ -46,6 +46,7 @@ const teams = Math.ceil(people / teamSize);
     for (let i = 0; i <= teams; i++) {
         await client.collection("teams").create({
             "name": "Team " + colors[Math.floor(Math.random() * colors.length)],
+            "member_names": "None",
             "current_question": 1,
             "code": Math.floor(Math.random() * 900000) + 100000,
         });

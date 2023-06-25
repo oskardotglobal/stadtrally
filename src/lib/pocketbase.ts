@@ -1,4 +1,7 @@
+import * as dotenv from "dotenv";
 import PocketBase from "pocketbase";
+
+dotenv.config()
 
 export const client = new PocketBase(process.env.POCKETBASE_URL);
 
