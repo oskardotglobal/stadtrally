@@ -7,7 +7,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "add_questions": "cd scripts && node add_questions.js",
+    "add_teams": "node scripts/add_teams.js"
   },
   "dependencies": {
     "@types/node": "^20.3.1",
