@@ -12,8 +12,6 @@ export default function LoginPage() {
     const [code, setCode] = useLoginCode()
     let unauthorized = false
 
-    document.getElementById("header")
-
     function login(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
 

@@ -45,4 +45,8 @@ scripts/group1
 scripts/group2
 
 # secrets
-.env
+.env*
+
+# yarn
+.pnp*
+.yarn

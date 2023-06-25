@@ -3,17 +3,30 @@ version: "3"
 volumes:
   data:
 
+networks:
+  stadtrally:
+    external: true
+
 services:
   
-  #app:
-  #  build:
-  #    context: .
-  #    dockerfile: Dockerfile
-  #    args:
-  #      POCKETBASE_URL: ${POCKETBASE_URL}
-  #      POCKETBASE_USER: ${POCKETBASE_USER}
-  #      POCKETBASE_PASSWD: ${POCKETBASE_PASSWD}
-  #  restart: always
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile   
+      args:
+        POCKETBASE_URL: ${POCKETBASE_URL}
+        POCKETBASE_USER: ${POCKETBASE_USER}
+        POCKETBASE_PASSWD: ${POCKETBASE_PASSWD}
+    restart: always
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.stadtrally.rule=Host(`oskar.global`) || Host(`www.oskar.global`)"
+      - "traefik.http.routers.stadtrally.entrypoints=websecure"
+      - "traefik.http.routers.stadtrally.tls.certResolver=cloudflare"
+      - "traefik.http.routers.stadtrally.service=stadtrally"
+      - "traefik.http.services.stadtrally.loadbalancer.server.port=3000"
+    networks:
+      - stadtrally
 
   pocketbase:
     image: ghcr.io/muchobien/pocketbase:latest
@@ -25,5 +38,14 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.pocketbase.rule=Host(`pocketbase.oskar.global`)"
+      - "traefik.http.routers.pocketbase.entrypoints=websecure"
+      - "traefik.http.routers.pocketbase.tls.certResolver=cloudflare"
+      - "traefik.http.routers.pocketbase.service=pocketbase"
+      - "traefik.http.services.pocketbase.loadbalancer.server.port=8090"
+    networks:
+      - stadtrally
 
   
