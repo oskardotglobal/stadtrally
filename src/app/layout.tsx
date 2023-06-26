@@ -14,14 +14,6 @@ export default function RootLayout({children}: {children: React.ReactNode }) {
             <main>
                 {children}
             </main>
-
-            <footer>
-                <p>
-                    (c) 2023 Oskar Manhart
-                    <br />
-                    <a href="https://github.com/oskardotglobal/stadtrally" target="_blank">View Source</a>
-                </p>
-            </footer>
         </body>
         </html>
     )

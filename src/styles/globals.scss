@@ -29,6 +29,11 @@ header {
     padding: 5% 5% 0 5%;
 }
 
+button {
+    height: 2.5em;
+    width: 5em;
+}
+
 footer {
     @include center-flex;
     padding: 0 5% 5% 5%;
