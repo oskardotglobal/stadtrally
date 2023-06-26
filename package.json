@@ -12,6 +12,7 @@
     "add_teams": "node scripts/add_teams.js"
   },
   "dependencies": {
+    "@popperjs/core": "^2.11.8",
     "@types/bootstrap": "^5.2.6",
     "@types/node": "^20.3.1",
     "@types/react": "18.2.5",
