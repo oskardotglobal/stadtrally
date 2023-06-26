@@ -6,7 +6,7 @@ FROM base AS builder
 WORKDIR /app
 
 COPY package.json yarn.lock ./
-RUN yarn --non-interactive
+RUN yarn --non-interactive --frozen-lockfile
 
 COPY src ./src
 COPY public ./public
