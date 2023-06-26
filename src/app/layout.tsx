@@ -1,6 +1,8 @@
 import React from "react";
 import Header from "@/components/Header";
 
+import "../styles/globals.scss";
+
 export const metadata = {
     title: "Stadtrally"
 }

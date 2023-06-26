@@ -17,11 +17,11 @@ export default function Home() {
     const imgRef = useRef();
 
     // @ts-ignore typescript 2 : the two ts-ignores
-    const onUpdate = useCallback(({ x, y, scale }) => {
+    const onUpdate = useCallback(({x, y, scale}) => {
         // @ts-ignore typescript 3: the return of the ts-ignore
         if (imgRef.current) imgRef.current.style.setProperty(
             "transform",
-            make3dTransformValue({ x, y, scale })
+            make3dTransformValue({x, y, scale})
         )
     }, [])
 
@@ -90,9 +90,9 @@ export default function Home() {
             return <div className="content">
                 <h1>
                     Task: {
-                        // @ts-ignore UP
-                        question.task
-                    }
+                    // @ts-ignore UP
+                    question.task
+                }
                 </h1>
 
                 <div>
@@ -109,57 +109,59 @@ export default function Home() {
                     </QuickPinchZoom>
                 </div>
 
+                <div className={"buttons"}>
                     <button onClick={prev}>Back to information</button>
                     <button onClick={next}>Continue</button>
                 </div>
+            </div>
 
         case 3:
-            return <div className="content">
-                {image && (
-                    <div>
-                        <QuickPinchZoom onUpdate={onUpdate}>
+            return <div className="content" id="page3">
+                <div>
+                    {image && (
+                        <div>
+                            <QuickPinchZoom onUpdate={onUpdate}>
+                                {
+                                    <img
+                                        // @ts-ignore
+                                        ref={imgRef}
+                                        alt="Couldn't upload image; select another"
+                                        src={image}
+                                    />
+                                }
+                            </QuickPinchZoom>
+
+                            <br/>
+
                             {
-                                <img
-                                    // @ts-ignore
-                                    ref={imgRef}
-                                    alt="Couldn't upload image; select another"
-                                    src={image}
-                                />
+                                // @ts-ignore shut
+                                <button onClick={() => setImage(null)}>Remove</button>
                             }
-                        </QuickPinchZoom>
+                            <button onClick={submit}>Submit</button>
+                        </div>
+                    )}
 
-                        <br/>
+                    <input
+                        type="file"
+                        accept="image/*"
+                        onChange={event => {
+                            const reader = new FileReader()
+                            // @ts-ignore this will totally break
+                            const objectURL = URL.createObjectURL(event.target.files[0])
 
-                        {
-                            // @ts-ignore shut
-                            <button onClick={() => setImage(null)}>Remove</button>
-                        }
-                        <button onClick={submit}>Submit</button>
-                    </div>
-                )}
+                            fetch(objectURL)
+                                .then(r => r.blob())
+                                .then(r => reader.readAsDataURL(r))
 
-                <br/>
-                <br/>
+                            reader.onload = () => {
+                                // @ts-ignore we'll see
+                                setImage(reader.result)
+                                URL.revokeObjectURL(objectURL)
+                            }
+                        }}
+                    />
 
-                <input
-                    type="file"
-                    accept="image/*"
-                    onChange={event => {
-                        const reader = new FileReader()
-                        // @ts-ignore this will totally break
-                        const objectURL = URL.createObjectURL(event.target.files[0])
-
-                        fetch(objectURL)
-                            .then(r => r.blob())
-                            .then(r => reader.readAsDataURL(r))
-
-                        reader.onload = () => {
-                            // @ts-ignore we'll see
-                            setImage(reader.result)
-                            URL.revokeObjectURL(objectURL)
-                        }
-                    }}
-                />
+                </div>
 
                 <button onClick={prev}>Back to task</button>
             </div>

@@ -7,7 +7,6 @@ import ProfileForm from "@/components/login/ProfileForm";
 import React from "react";
 
 import "@/styles/globals.scss";
-import {redirect} from "next/navigation";
 
 export default function LoginPage() {
     const [code, setCode] = useLoginCode()
@@ -49,7 +48,7 @@ export default function LoginPage() {
             }
 
             <br />
-            <button><a href="/">Start playing</a></button>
+            <Button><a href="/">Start playing</a></button>
         </div>
     }
 
