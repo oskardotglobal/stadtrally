@@ -48,7 +48,7 @@ export default function LoginPage() {
             }
 
             <br />
-            <Button><a href="/">Start playing</a></button>
+            <button><a href="/">Start playing</a></button>
         </div>
     }
 
